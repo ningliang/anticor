@@ -52,6 +52,19 @@ public class DataSource {
 			prices[date_index][symbol_index] = entry.getClose();
 		}
 		
+		// Count missing data points
+		int count = 0;
+		int total = 0;
+		for (int i = 0; i < ordered_dates.size(); i++) {
+			for (int j = 0; j < symbols_by_index.size(); j++) {
+				if (prices[i][j] == 0.0) {
+					count++;
+				}
+				total++;
+			}
+		}
+		System.out.println(count + "/" + total + " data points missing");
+		
 		// Fill in prices for missing dates from beginning to end
 		for (int i = 0; i < ordered_dates.size(); i++) {
 			for (int j = 0; j < symbols_by_index.size(); j++) {
